@@ -17,7 +17,7 @@ def int_to_payload(integer):
 class ModelClass:
     """ used for getting all the juicy payloads and making them """
 
-    def __init__(self, model=None):
+    def __init__(self, model=None, model_file=None):
         if not model:
             self.model = tf.keras.Sequential([
                 tf.keras.layers.LSTM(8, input_shape=(1, 1)),
@@ -25,6 +25,9 @@ class ModelClass:
             ])
         else:
             self.model = model
+        if model_file:
+            self.model.load_weights(model_file)
+        self.model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
             
     def train(self):
             # Read the payloads from the file
@@ -70,8 +73,16 @@ class ModelClass:
         self.model.save('model.h5')
     
         return self.model
-
-
+    def gen_payload(self):
+        """ Generates a  payload by using a random seed """
+        ran = random.randint(1, 128)
+        pre = self.model.predict(np.array([[ran]]))
+        payload = payload_list[np.argmax(pre)]
+        return payload
 if __name__ == '__main__':
-    modelc = ModelClass()
+    modelc = ModelClass(model_file='model.h5')
     modelc.train()
+    model = modelc.model
+    pay = modelc.gen_payload()
+    print(pay)
+    

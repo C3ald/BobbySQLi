@@ -3,3 +3,4 @@ winenv
 linuxenv
 __pycache__
 venv
+*.h5

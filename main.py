@@ -37,4 +37,6 @@ def initialize():
                 env.model = model
                 save_all(model_file, env)
                 print("saved model")
-initialize()
+
+if __name__ =='__main__':
+        args = argparse

@@ -12,8 +12,7 @@ class BobbySQLEnv(gym.Env):
         self.observation_space = gym.spaces.Box(low=0, high=1, shape=(1,))
     
      def reset(self):
-        seed = np.random.rand(128).reshape(128,1)
-        self.current_payload = self._generate_payload(seed)
+        self.current_payload = self._generate_payload()
         return self._get_observation()
     
      def step(self, action):
@@ -23,14 +22,14 @@ class BobbySQLEnv(gym.Env):
         else:
             reward = 0
         done = True
+        self.model.update_weights(reward)
         return self._get_observation(), reward, done, {}
     
      def _get_observation(self):
         return [int(self.website.is_vulnerable())]
     
-     def _generate_payload(self, seed):
-        seed = np.array([seed])
-        payload = self.model.predict(seed)[0]
+     def _generate_payload(self):
+        payload = self.model.gen_payload()
         return payload
 
 
