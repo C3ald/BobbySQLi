@@ -4,3 +4,4 @@ linuxenv
 __pycache__
 venv
 *.h5
+*.txt
