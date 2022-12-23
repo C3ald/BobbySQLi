@@ -16,6 +16,8 @@ for tamper in available_tampers:
     tampers.append(module.tamper)
 
 # print(len(tampers))
+
+
 def get_tampered_payloads(payload, level=7):
     final_payloads = []
     level = len(tampers) - level
@@ -23,14 +25,16 @@ def get_tampered_payloads(payload, level=7):
     write_payload_to_file(payload, mode='w')
     for i in range(len(available_tampers) - level):
         combs = get_combos(i)
+        combs = list(set(combs))
         for comb in combs:
+            comb = list(set(comb))
             for c in comb:
                 # Call the tamper method of the module to get the tampered payload
                 try:
                     tamper_func = c(payload)
                     pay = tamper_func
-                # If the tamper method returns a string, then the tamper)
-                # final_payloads.append(pay)
+            # If the tamper method returns a string, then the tamper)
+            # final_payloads.append(pay)
                     if pay not in final_payloads:
                         write_payload_to_file(pay)
                         final_payloads.append(pay)
