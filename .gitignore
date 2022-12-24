@@ -4,4 +4,6 @@ linuxenv
 __pycache__
 venv
 *.h5
-*.txt
+tampered_payload_data.txt
+model.h5
+*.req

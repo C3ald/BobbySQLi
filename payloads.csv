@@ -1,0 +1,6 @@
+payload,label
+'SELECT * FROM users WHERE username = 'admin' AND password = '12345''',1
+'SELECT * FROM users WHERE username = 'test' AND password = 'password''',0
+'SELECT * FROM users WHERE username = 'user' AND password = 'qwerty''',0
+'SELECT * FROM users WHERE username = 'admin' AND password = 'password''',0
+'SELECT * FROM users WHERE username = 'test' AND password = 'qwerty''',0

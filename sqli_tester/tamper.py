@@ -18,7 +18,7 @@ for tamper in available_tampers:
 # print(len(tampers))
 
 
-def get_tampered_payloads(payload, level=7):
+def get_tampered_payloads(payload, level=1):
     final_payloads = []
     level = len(tampers) - level
     final_payloads.append(payload)
